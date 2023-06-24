@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AlertContext } from "../context/notes/alertContext";
 
 export default function Login() {
@@ -7,6 +7,7 @@ export default function Login() {
   const [credential, setCredential] = useState({ email: "", password: "" });
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
+    console.log(credential.email, credential.password);
     e.preventDefault();
     const response = await fetch(`http://localhost:5000/api/auth/login`, {
       method: "POST",
@@ -25,17 +26,17 @@ export default function Login() {
       navigate("/");
       showAlert("Logged in Succesfully", "success");
     } else {
-      showAlert("Invalid Credentials", "Danger");
+      showAlert("Invalid Credentials", "danger");
     }
   };
   const handleChange = (e) => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
+    <>
+      {/* <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
+          <label htmlhtmlFor="email" className="form-label">
             Email address
           </label>
           <input
@@ -52,7 +53,7 @@ export default function Login() {
           </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">
+          <label htmlhtmlFor="password" className="form-label">
             Password
           </label>
           <input
@@ -67,7 +68,61 @@ export default function Login() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-      </form>
-    </div>
+      </form> */}
+      <div className="" style={{ marginTop: "150px" }}>
+        <div className="row justify-content-center mt-5">
+          <div className="col-lg-5 col-md-6 col-sm-8">
+            <div className="card shadow">
+              <div className="card-title text-center border-bottom">
+                <h2 className="p-2 text-primary">
+                  <b> Login</b>
+                </h2>
+              </div>
+              <div className="card-body">
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-4">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      aria-describedby="emailHelp"
+                      value={credential.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="password" className="form-label">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      name="password"
+                      value={credential.password}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="d-grid">
+                    <button type="submit" className="btn btn-primary">
+                      Login
+                    </button>
+                  </div>
+                  <div className="my-2">
+                    <span>
+                      Don't have an account? <Link to={"/signup"}>Sign up</Link>
+                    </span>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

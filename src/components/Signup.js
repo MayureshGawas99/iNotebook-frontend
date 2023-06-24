@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AlertContext } from "../context/notes/alertContext";
 
 export default function Signup() {
@@ -46,74 +46,86 @@ export default function Signup() {
     }
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            aria-describedby="emailHelp"
-            onChange={handleChange}
-            name="name"
-            value={credential.name}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            onChange={handleChange}
-            name="email"
-            value={credential.email}
-          />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
+    <div className="" style={{ marginTop: "50px" }}>
+      <div className="row justify-content-center mt-5">
+        <div className="col-lg-5 col-md-6 col-sm-8">
+          <div className="card shadow">
+            <div className="card-title text-center border-bottom">
+              <h2 className="p-2 text-primary">
+                <b> Sign Up</b>
+              </h2>
+            </div>
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label htmlFor="name" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    aria-describedby="emailHelp"
+                    value={credential.name}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    aria-describedby="emailHelp"
+                    value={credential.email}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="password" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    value={credential.password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="cpassword" className="form-label">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="cpassword"
+                    name="cpassword"
+                    value={credential.cpassword}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="d-grid">
+                  <button type="submit" className="btn btn-primary">
+                    Register
+                  </button>
+                </div>
+                <div className="my-2">
+                  <span>
+                    Back to <Link to={"/login"}>Login</Link>
+                  </span>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            onChange={handleChange}
-            name="password"
-            value={credential.password}
-            required
-            minLength={5}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="cpassword" className="form-label">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="cpassword"
-            onChange={handleChange}
-            name="cpassword"
-            value={credential.cpassword}
-            required
-            minLength={5}
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      </div>
     </div>
   );
 }

@@ -64,14 +64,7 @@ export default function Navbar() {
             </button>
           </form> */}
           {!localStorage.getItem("token") ? (
-            <div className="d-flex gap-2">
-              <Link className="btn btn-primary" to="/login" role="button">
-                Login
-              </Link>
-              <Link className="btn btn-primary" to="/signup" role="button">
-                Signup
-              </Link>
-            </div>
+            <p></p>
           ) : (
             <button
               className="btn btn-primary"
