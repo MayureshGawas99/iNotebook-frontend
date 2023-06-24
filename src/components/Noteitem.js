@@ -14,13 +14,15 @@ export default function Noteitem(props) {
   const { deleteNote } = useContext(NoteContext);
   return (
     <div className="col-md-4 col-sm-6">
-      <div className="card my-3">
+      <div className="card my-3 d-flex" style={{ minHeight: "300px" }}>
         <div className="card-body">
           <h5 className="card-title">{note.title}</h5>
           <p className="card-text">{note.description}</p>
+        </div>
+        <div style={{ padding: "16px" }}>
           <hr />
           <div
-            className="date text-secondary d-flex justify-content-between"
+            className=" date text-secondary d-flex justify-content-between"
             style={{ fontSize: "12px" }}
           >
             <p>{getDateTime(note.date)}</p>
