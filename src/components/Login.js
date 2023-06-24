@@ -7,7 +7,6 @@ export default function Login() {
   const [credential, setCredential] = useState({ email: "", password: "" });
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
-    console.log(credential.email, credential.password);
     e.preventDefault();
     const response = await fetch(`http://localhost:5000/api/auth/login`, {
       method: "POST",
@@ -20,7 +19,7 @@ export default function Login() {
       }),
     });
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authToken);
       navigate("/");
@@ -34,41 +33,6 @@ export default function Login() {
   };
   return (
     <>
-      {/* <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlhtmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            aria-describedby="emailHelp"
-            value={credential.email}
-            onChange={handleChange}
-          />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
-        </div>
-        <div className="mb-3">
-          <label htmlhtmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={credential.password}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form> */}
       <div className="" style={{ marginTop: "150px" }}>
         <div className="row justify-content-center mt-5">
           <div className="col-lg-5 col-md-6 col-sm-8">

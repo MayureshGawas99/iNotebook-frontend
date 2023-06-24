@@ -15,8 +15,8 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json();
-    console.log(json);
-    // setNotes(json);
+    // console.log(json);
+    setNotes(json);
   };
   // Add a Note
   const addNote = async (title, description, tag) => {
