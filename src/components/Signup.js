@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AlertContext } from "../context/notes/alertContext";
+import NoteContext from "../context/notes/noteContext";
 
 export default function Signup() {
   const { showAlert } = useContext(AlertContext);
@@ -12,28 +13,26 @@ export default function Signup() {
     cpassword: "",
   });
   const navigate = useNavigate();
+  const { host } = useContext(NoteContext);
+
   const handleChange = (e) => {
     setCredential({ ...credential, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (credential.password === credential.cpassword) {
-      const response = await fetch(
-        `http://localhost:5000/api/auth/createuser`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: credential.name,
-            email: credential.email,
-            password: credential.password,
-          }),
-        }
-      );
+      const response = await fetch(`${host}/api/auth/createuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: credential.name,
+          email: credential.email,
+          password: credential.password,
+        }),
+      });
       const json = await response.json();
-      console.log(json);
       if (json.success) {
         localStorage.setItem("token", json.authToken);
         navigate("/");
