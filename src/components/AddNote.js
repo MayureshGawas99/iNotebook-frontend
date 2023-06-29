@@ -22,7 +22,6 @@ export default function AddNote() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(note.title, note.description, note.tag);
     addNote(note.title, note.description, note.tag);
     setNote({
       title: "",

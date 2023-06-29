@@ -1,14 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AlertContext } from "../context/notes/alertContext";
+import NoteContext from "../context/notes/noteContext";
 
 export default function Login() {
   const { showAlert } = useContext(AlertContext);
+  const { host } = useContext(NoteContext);
   const [credential, setCredential] = useState({ email: "", password: "" });
   let navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:5000/api/auth/login`, {
+    const response = await fetch(`${host}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,8 +20,8 @@ export default function Login() {
         password: credential.password,
       }),
     });
+
     const json = await response.json();
-    // console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authToken);
       navigate("/");

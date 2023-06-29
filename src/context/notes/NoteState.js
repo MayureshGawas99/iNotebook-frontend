@@ -1,8 +1,9 @@
 import { useState } from "react";
 import NoteContext from "./noteContext";
+// require("dotenv").config();
 
 const NoteState = (props) => {
-  const host = "http://localhost:5000";
+  const host = process.env.REACT_APP_HOST;
   const notesinitial = [];
   const [notes, setNotes] = useState(notesinitial);
   // Get all Note
@@ -15,7 +16,6 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json();
-    // console.log(json);
     setNotes(json);
   };
   // Add a Note
@@ -28,6 +28,7 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
+
     const json = await response.json();
     setNotes(notes.concat(json));
   };
@@ -72,7 +73,7 @@ const NoteState = (props) => {
 
   return (
     <NoteContext.Provider
-      value={{ notes, setNotes, addNote, deleteNote, editNote, getNotes }}
+      value={{ notes, setNotes, addNote, deleteNote, editNote, getNotes, host }}
     >
       {props.children}
     </NoteContext.Provider>
